@@ -1,0 +1,136 @@
+.hero {
+    background: url('../../assets//images/hero.jpg') no-repeat fixed;
+    width: 100%;
+    height: 650px;
+    object-fit: contain;
+    position: relative;
+    z-index: 9;
+
+
+    &__title {
+        font-size: 64px;
+        font-weight: 700;
+        line-height: 96px;
+        letter-spacing: 0.5px;
+        color: #fff;
+        padding-top: 258px;
+        max-width: 567px;
+    }
+
+    &__hour {
+        display: flex;
+        align-items: center;
+    }
+
+
+    &__banner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        transform: translateY(25%);
+
+        &__title {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 30px;
+            letter-spacing: 0.5px;
+            color: #223263;
+            max-width: 200px;
+        }
+
+        &__price {
+            font-size: 30px;
+            font-weight: 700;
+            line-height: 54px;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-end;
+            color: #40BFFF;
+
+
+            span {
+                font-size: 20px;
+            }
+        }
+
+        &__price__box {
+            margin-top: 185px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            span {
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 27px;
+                letter-spacing: 0.5px;
+                text-decoration: line-through;
+                color: #9098B1;
+
+                &:nth-child(2) {
+                    font-weight: 700;
+                    text-decoration: none;
+                    color: #FB7181;
+                }
+            }
+        }
+
+        &__card {
+            background: url('../../assets/images/product-img1.svg') no-repeat;
+            background-size: cover;
+            width: 417.94px;
+            height: 358.31px;
+            padding: 20px;
+            padding-left: 52px;
+
+
+
+            &:nth-child(2) {
+                background: url('../../assets/images/product-img2.svg') no-repeat;
+
+                .hero__banner__card__top {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    justify-content: space-between;
+                }
+
+                .hero__banner__price__box {
+                    margin-top: 225px;
+                    justify-content: center;
+                }
+
+            }
+
+            &:nth-child(3) {
+                background: url('../../assets/images/product-img3.svg') no-repeat;
+
+                .hero__banner__card__top {
+                    display: flex;
+                    align-items: flex-start;
+                    flex-direction: column;
+                    gap: 10px;
+                }
+
+                .hero__banner__price__box {
+                    margin-top: 0;
+                }
+
+                .hero__banner__price {
+                    margin-top: 161px;
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width:1000px) {
+    .hero {
+        &__banner {
+            display: none;
+        }
+    }
+}
