@@ -1,0 +1,149 @@
+.top {
+    padding-top: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #FAFAFB;
+
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+    }
+
+    &__left {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+
+        select {
+            color: #22262A;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 24.36px;
+            border: none;
+            outline: none;
+        }
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+
+        a {
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 24.36px;
+            color: #262626;
+        }
+
+        div {
+            display: flex;
+            align-items: center;
+
+            span {
+                font-size: 20px;
+                font-weight: 400;
+                line-height: 24.36px;
+                color: #262626;
+                opacity: 50%;
+            }
+        }
+    }
+
+}
+
+.header {
+    width: 100%;
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    left: 0;
+    padding: 26px 0;
+
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    &__list {
+        display: flex;
+        align-items: center;
+        gap: 97px;
+    }
+
+    &__link {
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 36px;
+        color: #262626;
+        transition: all .3s ease-in-out;
+
+    }
+
+    .active {
+        color: #33A0FF;
+    }
+
+    &__mobile {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        border-top: 1px solid #EBF0FF;
+        background-color: #fff;
+        padding: 10px 0;
+        display: none;
+        align-items: center;
+        justify-content: space-evenly;
+
+        &__link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        span {
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 15px;
+            letter-spacing: 0.5px;
+            color: #9098B1;
+        }
+
+        .active {
+            span {
+                color: #40BFFF;
+            }
+        }
+    }
+}
+
+@media (max-width:1070px) {
+    .header {
+        &__list {
+            gap: 24px;
+        }
+    }
+}
+
+
+@media (max-width:770px) {
+    .header {
+        &__link {
+            font-size: 18px;
+        }
+    }
+}
+
+@media (max-width:630px) {
+    .header {
+
+        &__mobile {
+            display: flex;
+        }
+    }
+}
