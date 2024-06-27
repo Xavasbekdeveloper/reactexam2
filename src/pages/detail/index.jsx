@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
   useGetProductByIdQuery,
@@ -16,6 +16,10 @@ const Detail = () => {
   const { data } = useGetProductByIdQuery(Id);
   const { data: productsData, isLoading: productsLoading } =
     useGetProductsQuery({ limit: 4 });
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
 
   const rating = (rate) => {
     let res = [];

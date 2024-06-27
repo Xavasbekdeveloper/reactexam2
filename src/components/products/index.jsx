@@ -3,15 +3,19 @@ import { useGetProductsQuery } from "../../context/api/productAPi";
 import { useGetCategoryQuery } from "../../context/api/categoryApi";
 import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
-import { IoMdHeartEmpty } from "react-icons/io";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import "./products.scss";
+import { addWishlist } from "../../context/slice/wishlistSlice";
 
 const Products = () => {
   const [categoryValue, setCategoryValue] = useState("all");
   const [limitValue, setLimitValue] = useState(1);
   let limit = 8;
+  const dispatch = useDispatch();
+  const wishlistData = useSelector((state) => state.wishlist.data);
 
   const { data: productsData, isLoading: productsLoading } =
     useGetProductsQuery({ limit: limit * limitValue });
@@ -19,7 +23,7 @@ const Products = () => {
   const { data: categoriesData, isLoading: categoryLoading } =
     useGetCategoryQuery({ category });
 
-  console.log(productsData);
+  console.log(wishlistData);
 
   let categories = categoriesData?.map((category, inx) => (
     <li key={inx} className="products__category__item">
@@ -58,15 +62,24 @@ const Products = () => {
             <button>
               <IoCartOutline />
             </button>
-            <button>
-              <IoMdHeartEmpty />
+            <button
+              onClick={() => dispatch(addWishlist(product))}
+              className="products__card__heart-btn"
+            >
+              {wishlistData.some((el) => el.id === product.id) ? (
+                <FaHeart color="crimson" />
+              ) : (
+                <FaRegHeart color="#33A0FF" />
+              )}
             </button>
           </div>
         </div>
         <div className="products__card__info">
-          <h3 title={product?.title} className="products__card__title">
-            {product?.title}
-          </h3>
+          <Link to={`/products/${product.id}`}>
+            <h3 title={product?.title} className="products__card__title">
+              {product?.title}
+            </h3>
+          </Link>
           <div className="products__card__rating">{res}</div>
           <div className="products__card__price-box">
             <span>${product.price}</span>

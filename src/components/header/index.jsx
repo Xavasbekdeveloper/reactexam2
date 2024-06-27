@@ -9,10 +9,12 @@ import mobileHome from "../../assets/icons/mobile-home.svg";
 import mobileCart from "../../assets/icons/mobile-cart.svg";
 import mobileOffer from "../../assets/icons/mobile-offer.svg";
 import mobileAccount from "../../assets/icons/mobile-account.svg";
+import { useSelector } from "react-redux";
 
 import "./header.scss";
 
 const Header = () => {
+  const wishlistData = useSelector((state) => state.wishlist.data);
   return (
     <>
       <div className="top">
@@ -33,8 +35,9 @@ const Header = () => {
             <Link to={"/account"}>
               <img src={profile} alt="profile img" />
             </Link>
-            <Link to={"/wishlist"}>
+            <Link className="header__heart" to={"/wishlist"}>
               <img src={heart} alt="heart img" />
+              <span>{wishlistData?.length}</span>
             </Link>
             <Link to={"/cart"}>
               <img src={cart} alt="cart img" />
@@ -91,8 +94,9 @@ const Header = () => {
               type="text"
               placeholder="search product"
             />
-            <Link to={"/wishlist"}>
+            <Link className="header__heart" to={"/wishlist"}>
               <img src={heart} alt="heart img" />
+              <span>{wishlistData?.length}</span>
             </Link>
           </div>
 
@@ -116,9 +120,9 @@ const Header = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to={"/offer"} className={"header__mobile__link"}>
+              <NavLink to={"/contact"} className={"header__mobile__link"}>
                 <img src={mobileOffer} alt="mobile home img" />
-                <span>Offer</span>
+                <span>Contact</span>
               </NavLink>
             </li>
             <li>
