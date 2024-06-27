@@ -18,8 +18,24 @@
     }
 
     &__hour {
-        display: flex;
+        display: none;
         align-items: center;
+        gap: 4px;
+
+        p {
+            padding: 9px;
+            background-color: #fff;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 24px;
+            letter-spacing: 0.5px;
+            color: #223263;
+        }
+
+        span {
+            color: #fff;
+        }
     }
 
 
@@ -131,6 +147,23 @@
     .hero {
         &__banner {
             display: none;
+        }
+
+    }
+}
+
+@media (max-width:700px) {
+    .hero {
+        height: 400px;
+
+        &__hour {
+            display: flex;
+        }
+
+        &__title {
+            padding-top: 80px;
+            font-size: 30px;
+            line-height: 60px;
         }
     }
 }
