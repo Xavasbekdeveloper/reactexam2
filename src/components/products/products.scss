@@ -197,14 +197,53 @@
 @media (max-width: 466px) {
     .products {
         &__card {
+
+            &__img img {
+                height: 180px;
+            }
+
             &__info {
                 align-items: flex-start;
+                text-align: left;
             }
 
             &__price-box {
                 align-items: flex-start;
                 flex-direction: column;
                 gap: 0px;
+            }
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    .products {
+        &__cards {
+            grid-gap: 6px;
+        }
+
+        &__card {
+            border-width: 1px;
+
+            &__info {
+                gap: 2px;
+            }
+
+            &__img img {
+                height: 120px;
+            }
+
+            &__title {
+                font-size: 13px;
+                line-height: 1.6;
+            }
+
+            &__rating {
+                gap: 3px;
+
+                svg {
+                    font-size: 14px;
+                }
             }
         }
     }
