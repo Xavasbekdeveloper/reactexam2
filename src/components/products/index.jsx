@@ -2,6 +2,9 @@ import React, { memo, useState } from "react";
 import { useGetProductsQuery } from "../../context/api/productAPi";
 import { useGetCategoryQuery } from "../../context/api/categoryApi";
 import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from "react-icons/io";
+import { IoCartOutline } from "react-icons/io5";
+import { IoMdHeartEmpty } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 import "./products.scss";
 
@@ -46,8 +49,19 @@ const Products = () => {
 
     return (
       <div key={product.id} className="products__card">
+        {" "}
         <div className="products__card__img">
-          <img src={product?.image} alt={product?.title} />
+          <Link to={`/products/${product.id}`}>
+            <img src={product?.image} alt={product?.title} />
+          </Link>
+          <div className="products__card__img__btns">
+            <button>
+              <IoCartOutline />
+            </button>
+            <button>
+              <IoMdHeartEmpty />
+            </button>
+          </div>
         </div>
         <div className="products__card__info">
           <h3 title={product?.title} className="products__card__title">
