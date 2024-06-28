@@ -6,6 +6,11 @@ import Footer from "./components/footer";
 import Detail from "./pages/detail";
 import Wishlist from "./pages/wishlist";
 import Contact from "./pages/contact";
+import Admin from "./pages/admin";
+import Login from "./pages/login";
+import Auth from "./pages/auth";
+import Cart from "./pages/cart";
+import numberBrm from "number-brm";
 
 function App() {
   return (
@@ -15,7 +20,12 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products/:Id" element={<Detail />} />
         <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/" element={<Auth />}>
+          <Route path="/admin" element={<Admin />} />
+        </Route>
+        <Route path="/login" element={<Login />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
       <Footer />

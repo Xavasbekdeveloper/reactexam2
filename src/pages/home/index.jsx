@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import Hero from "../../components/hero";
 import Products from "../../components/products";
 import Sneakers from "../../components/sneakers";
@@ -7,6 +7,10 @@ import News from "../../components/news";
 import Featured from "../../components/featured";
 
 const Home = () => {
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
+
   return (
     <>
       <Hero />

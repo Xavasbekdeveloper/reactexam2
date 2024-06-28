@@ -1,0 +1,180 @@
+.modal {
+
+    &__overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        width: 100%;
+        height: 100vh;
+        background-color: #0001;
+    }
+
+    &__form {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 9991;
+        border-radius: 10px;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        width: 70%;
+        padding: 40px;
+
+        &__top {
+            margin-bottom: 30px;
+
+            &__btns {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                margin-bottom: 10px;
+
+                button {
+                    border: none;
+                    background-color: transparent;
+                }
+
+                svg {
+                    width: 25px;
+                    height: 25px;
+                    color: #40BFFF;
+                }
+            }
+
+            h3 {
+                font-size: 32px;
+                font-weight: 600;
+                line-height: 37.57px;
+                color: #40BFFF;
+                text-align: center;
+            }
+        }
+
+
+        &__bottom {
+
+            &__box {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-gap: 20px;
+
+            }
+
+            input {
+                width: 100%;
+                height: 50px;
+                background: #DFDEDE;
+                padding: 10px 14px;
+                font-size: 16px;
+                line-height: 21.82px;
+                letter-spacing: -0.02em;
+                border: none;
+                outline: none;
+                border-radius: 10px;
+                color: #999999;
+            }
+
+
+            textarea {
+                resize: none;
+                width: 100%;
+                height: 100px;
+                background: #DFDEDE;
+                padding: 10px 14px;
+                font-size: 16px;
+                line-height: 21.82px;
+                letter-spacing: -0.02em;
+                border: none;
+                outline: none;
+                border-radius: 10px;
+                color: #999999;
+            }
+
+            &__pay {
+                display: flex;
+                flex-direction: column;
+
+                input {
+                    height: 20px;
+                }
+
+                div {
+                    display: grid;
+                    align-items: center;
+                    grid-template-columns: 2fr 1fr;
+                    padding: 15px;
+                }
+
+                label {
+                    display: flex;
+                    align-items: center;
+                    gap: 7px;
+                    font-size: 12px;
+                    font-weight: 700;
+                    line-height: 18px;
+                    letter-spacing: 0.5px;
+                    color: #223263;
+
+                    svg {
+                        color: #40BFFF;
+                        width: 15px;
+                        height: 15px;
+                    }
+                }
+            }
+
+            &__btns {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                button {
+                    margin-top: 27px;
+                    box-shadow: 0px 10px 40px 0px #F8A17033;
+                    font-size: 24px;
+                    font-weight: 800;
+                    line-height: 32.74px;
+                    letter-spacing: -0.02em;
+                    color: #fff;
+                    padding: 12px 40px;
+                    border: none;
+                    border-radius: 10px;
+                    background: #33A0FF;
+                }
+            }
+
+        }
+
+    }
+}
+
+
+@media (max-width: 840px) {
+    .modal {
+        &__form {
+            width: 80%;
+        }
+    }
+}
+
+@media (max-width: 786px) {
+    .modal {
+        &__form {
+
+            &__bottom__box {
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+}
+
+@media (max-width: 450px) {
+    .modal {
+        &__form {
+            width: 90%;
+            padding: 15px;
+        }
+    }
+}

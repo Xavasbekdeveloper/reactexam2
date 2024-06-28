@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
   useGetProductByIdQuery,
@@ -6,14 +6,16 @@ import {
 } from "../../context/api/productAPi";
 import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from "react-icons/io";
 import { FaPlus, FaMinus } from "react-icons/fa";
-import { IoCartOutline } from "react-icons/io5";
+import { IoCartOutline, IoCart } from "react-icons/io5";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
+import { addWishlist } from "../../context/slice/wishlistSlice";
+import { addToCart } from "../../context/slice/cartSlice";
 
 import "./detail.scss";
-import { addWishlist } from "../../context/slice/wishlistSlice";
 
 const Detail = () => {
+  const [count, setCount] = useState(1);
   const { Id } = useParams();
   const { data } = useGetProductByIdQuery(Id);
   const { data: productsData, isLoading: productsLoading } =
@@ -21,6 +23,7 @@ const Detail = () => {
 
   const dispatch = useDispatch();
   const wishlistData = useSelector((state) => state.wishlist.data);
+  const cartData = useSelector((state) => state.cart.value);
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -41,34 +44,25 @@ const Detail = () => {
   };
 
   let products = productsData?.map((product) => {
-    let res = [];
-    for (let i = 0; i < parseInt(product.rating.rate); i++) {
-      res.push(<IoIosStar />);
-    }
-    if (product.rating.rate % 1 > 0.4) {
-      res.push(<IoIosStarHalf />);
-    }
-    for (let i = Math.round(product.rating.rate); i < 5; i++) {
-      res.push(<IoIosStarOutline />);
-    }
-
     return (
       <div key={product.id} className="detail__bottom__card">
         {" "}
         <div className="detail__bottom__card__img">
-          <Link to={`/products/${product.id}`}>
-            <img src={product?.image} alt={product?.title} />
-          </Link>
+          <img src={product?.image} alt={product?.title} />
           <div className="detail__bottom__card__img__btns">
-            <button>
-              <IoCartOutline />
-            </button>
             <button
-              onClick={() => dispatch(addWishlist(product))}
-              className="products__card__heart-btn"
+              disabled={cartData?.some((el) => el.id === product.id)}
+              onClick={() => dispatch(addToCart(product))}
             >
+              {cartData?.some((el) => el.id === product.id) ? (
+                <IoCart color="#33A0FF" />
+              ) : (
+                <IoCartOutline color="#33A0FF" />
+              )}
+            </button>
+            <button onClick={() => dispatch(addWishlist(product))}>
               {wishlistData.some((el) => el.id === product.id) ? (
-                <FaHeart color="crimson" />
+                <FaHeart color="#33A0FF" />
               ) : (
                 <FaRegHeart color="#33A0FF" />
               )}
@@ -79,7 +73,9 @@ const Detail = () => {
           <h3 title={product?.title} className="detail__bottom__card__title">
             {product?.title}
           </h3>
-          <div className="detail__bottom__card__rating">{res}</div>
+          <div className="detail__bottom__card__rating">
+            {rating(product.rating.rate)}
+          </div>
           <div className="detail__bottom__card__price-box">
             <span>${product.price}</span>
             <div>
@@ -155,22 +151,36 @@ const Detail = () => {
             {/*  */}
             <div className="detail__top__middle__btns">
               <div className="detail__top__middle__btns-first">
-                <button>
+                <button
+                  disabled={count <= 1}
+                  onClick={() => setCount((p) => p - 1)}
+                >
                   <FaMinus />
                 </button>
-                <span>1</span>
-                <button>
+                <span>{count}</span>
+                <button
+                  disabled={data?.rating?.count <= count}
+                  onClick={() => setCount((p) => p + 1)}
+                >
                   <FaPlus />
                 </button>
               </div>
 
               <div className="detail__top__middle__btns-second">
-                <button>
-                  <IoCartOutline /> Add to cart
+                <button
+                  disabled={cartData?.some((el) => el.id === data?.id)}
+                  onClick={() => dispatch(addToCart(data))}
+                >
+                  {cartData?.some((el) => el.id === data?.id) ? (
+                    <span>Added</span>
+                  ) : (
+                    <span>Add to cart</span>
+                  )}
+                  <IoCartOutline />
                 </button>
                 <button onClick={() => dispatch(addWishlist(data))}>
                   {wishlistData.some((el) => el.id === data?.id) ? (
-                    <FaHeart color="crimson" />
+                    <FaHeart color="#33A0FF" />
                   ) : (
                     <FaRegHeart color="#33A0FF" />
                   )}

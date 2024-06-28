@@ -2,13 +2,14 @@ import React, { memo, useState } from "react";
 import { useGetProductsQuery } from "../../context/api/productAPi";
 import { useGetCategoryQuery } from "../../context/api/categoryApi";
 import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from "react-icons/io";
-import { IoCartOutline } from "react-icons/io5";
+import { IoCartOutline, IoCart } from "react-icons/io5";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { addWishlist } from "../../context/slice/wishlistSlice";
+import { addToCart } from "../../context/slice/cartSlice";
 
 import "./products.scss";
-import { addWishlist } from "../../context/slice/wishlistSlice";
 
 const Products = () => {
   const [categoryValue, setCategoryValue] = useState("all");
@@ -16,14 +17,13 @@ const Products = () => {
   let limit = 8;
   const dispatch = useDispatch();
   const wishlistData = useSelector((state) => state.wishlist.data);
+  const cartData = useSelector((state) => state.cart.value);
 
   const { data: productsData, isLoading: productsLoading } =
     useGetProductsQuery({ limit: limit * limitValue });
   let category = categoryValue === "all" ? "" : "/category";
   const { data: categoriesData, isLoading: categoryLoading } =
     useGetCategoryQuery({ category });
-
-  console.log(wishlistData);
 
   let categories = categoriesData?.map((category, inx) => (
     <li key={inx} className="products__category__item">
@@ -55,19 +55,24 @@ const Products = () => {
       <div key={product.id} className="products__card">
         {" "}
         <div className="products__card__img">
-          <Link to={`/products/${product.id}`}>
-            <img src={product?.image} alt={product?.title} />
-          </Link>
+          <img src={product?.image} alt={product?.title} />
           <div className="products__card__img__btns">
-            <button>
-              <IoCartOutline />
+            <button
+              disabled={cartData?.some((el) => el.id === product.id)}
+              onClick={() => dispatch(addToCart(product))}
+            >
+              {cartData?.some((el) => el.id === product.id) ? (
+                <IoCart color="#33A0FF" />
+              ) : (
+                <IoCartOutline color="#33A0FF" />
+              )}
             </button>
             <button
               onClick={() => dispatch(addWishlist(product))}
               className="products__card__heart-btn"
             >
               {wishlistData.some((el) => el.id === product.id) ? (
-                <FaHeart color="crimson" />
+                <FaHeart color="#33A0FF" />
               ) : (
                 <FaRegHeart color="#33A0FF" />
               )}

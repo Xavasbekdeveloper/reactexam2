@@ -32,9 +32,7 @@ const Wishlist = () => {
       <div key={product.id} className="products__card">
         {" "}
         <div className="products__card__img">
-          <Link to={`/products/${product.id}`}>
-            <img src={product?.image} alt={product?.title} />
-          </Link>
+          <img src={product?.image} alt={product?.title} />
           <div className="products__card__img__btns">
             <button>
               <IoCartOutline />
@@ -69,6 +67,7 @@ const Wishlist = () => {
       </div>
     );
   });
+
   return (
     <section className="wishlist">
       <div className="container">

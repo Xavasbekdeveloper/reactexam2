@@ -10,11 +10,14 @@ import mobileCart from "../../assets/icons/mobile-cart.svg";
 import mobileOffer from "../../assets/icons/mobile-offer.svg";
 import mobileAccount from "../../assets/icons/mobile-account.svg";
 import { useSelector } from "react-redux";
+import { RiLoginBoxLine } from "react-icons/ri";
 
 import "./header.scss";
 
 const Header = () => {
   const wishlistData = useSelector((state) => state.wishlist.data);
+  const cartData = useSelector((state) => state.cart.value);
+  const isLogin = useSelector((state) => state.auth.token);
   return (
     <>
       <div className="top">
@@ -32,15 +35,20 @@ const Header = () => {
             </select>
           </div>
           <div className="top__right">
-            <Link to={"/account"}>
-              <img src={profile} alt="profile img" />
+            <Link to={isLogin ? "/admin" : "/login"}>
+              {isLogin ? (
+                <img src={profile} alt="profile img" />
+              ) : (
+                <RiLoginBoxLine />
+              )}
             </Link>
             <Link className="header__heart" to={"/wishlist"}>
               <img src={heart} alt="heart img" />
-              <span>{wishlistData?.length}</span>
+              <p>{wishlistData?.length}</p>
             </Link>
-            <Link to={"/cart"}>
+            <Link className="header__heart" to={"/cart"}>
               <img src={cart} alt="cart img" />
+              <p>{cartData?.length}</p>
             </Link>
             <Link to={"/items"}>items</Link>
             <div>
@@ -96,7 +104,7 @@ const Header = () => {
             />
             <Link className="header__heart" to={"/wishlist"}>
               <img src={heart} alt="heart img" />
-              <span>{wishlistData?.length}</span>
+              <p>{wishlistData?.length}</p>
             </Link>
           </div>
 
@@ -114,9 +122,13 @@ const Header = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to={"/cart"} className={"header__mobile__link"}>
+              <NavLink
+                to={"/cart"}
+                className={"header__mobile__link header__heart"}
+              >
                 <img src={mobileCart} alt="mobile home img" />
                 <span>Cart</span>
+                <p>{cartData?.length}</p>
               </NavLink>
             </li>
             <li>
@@ -126,9 +138,16 @@ const Header = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to={"/account"} className={"header__mobile__link"}>
-                <img src={mobileAccount} alt="mobile home img" />
-                <span>Account</span>
+              <NavLink
+                to={isLogin ? "/admin" : "/login"}
+                className={"header__mobile__link"}
+              >
+                {isLogin ? (
+                  <img src={mobileAccount} alt="mobile home img" />
+                ) : (
+                  <RiLoginBoxLine />
+                )}
+                <span>{isLogin ? "Admin" : "Login"}</span>
               </NavLink>
             </li>
           </ul>
