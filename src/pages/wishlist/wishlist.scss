@@ -64,3 +64,13 @@
         }
     }
 }
+
+@media (max-width: 570px) {
+    .wishlist {
+        &__empty {
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
