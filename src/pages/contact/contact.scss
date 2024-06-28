@@ -1,0 +1,110 @@
+.contact {
+    padding: 60px 0;
+
+    &__top {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        gap: 30px;
+
+        &__left {
+            background: url('../../assets/images/contact.png') no-repeat;
+            height: 715px;
+            background-position: center;
+            background-size: 100%;
+            padding-top: 123px;
+            padding-left: 86px;
+
+            h2 {
+                font-size: 48px;
+                font-weight: 600;
+                line-height: 56.35px;
+                color: #fff;
+            }
+
+            p {
+                margin-top: 56px;
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 18.78px;
+                color: #fff;
+
+                &:last-child {
+                    max-width: 234px;
+                }
+            }
+        }
+
+        &__form {
+            display: flex;
+            flex-direction: column;
+            gap: 21px;
+
+            &__group {
+                display: flex;
+                flex-direction: column;
+                gap: 7px;
+            }
+
+            label {
+                color: #373737;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 16.44px;
+            }
+
+            input,
+            textarea {
+                width: 100%;
+                outline: none;
+                border: 1px solid #969393;
+                border-radius: 3px;
+                box-shadow: 1px 3px 3px 0px #00000003;
+                padding: 20px;
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 18.78px;
+                color: #969393;
+            }
+
+            textarea {
+                resize: none;
+                height: 230px;
+            }
+        }
+
+    }
+}
+
+@media (max-width: 1000px) {
+    .contact {
+        &__top {
+            &__left {
+                padding-left: 20px;
+            }
+        }
+    }
+}
+
+@media (max-width: 940px) {
+    .contact {
+        &__top {
+            grid-template-columns: 1fr;
+
+            &__left {
+                height: 500px;
+            }
+        }
+    }
+}
+
+@media (max-width: 478px) {
+    .contact {
+        &__top {
+
+            &__left {
+                display: none;
+            }
+        }
+    }
+}

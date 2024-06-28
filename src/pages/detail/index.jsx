@@ -7,15 +7,20 @@ import {
 import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from "react-icons/io";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
-import { IoMdHeartEmpty } from "react-icons/io";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
 
 import "./detail.scss";
+import { addWishlist } from "../../context/slice/wishlistSlice";
 
 const Detail = () => {
   const { Id } = useParams();
   const { data } = useGetProductByIdQuery(Id);
   const { data: productsData, isLoading: productsLoading } =
     useGetProductsQuery({ limit: 4 });
+
+  const dispatch = useDispatch();
+  const wishlistData = useSelector((state) => state.wishlist.data);
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -58,8 +63,15 @@ const Detail = () => {
             <button>
               <IoCartOutline />
             </button>
-            <button>
-              <IoMdHeartEmpty />
+            <button
+              onClick={() => dispatch(addWishlist(product))}
+              className="products__card__heart-btn"
+            >
+              {wishlistData.some((el) => el.id === product.id) ? (
+                <FaHeart color="crimson" />
+              ) : (
+                <FaRegHeart color="#33A0FF" />
+              )}
             </button>
           </div>
         </div>
@@ -156,8 +168,12 @@ const Detail = () => {
                 <button>
                   <IoCartOutline /> Add to cart
                 </button>
-                <button>
-                  <IoMdHeartEmpty />
+                <button onClick={() => dispatch(addWishlist(data))}>
+                  {wishlistData.some((el) => el.id === data?.id) ? (
+                    <FaHeart color="crimson" />
+                  ) : (
+                    <FaRegHeart color="#33A0FF" />
+                  )}
                 </button>
               </div>
             </div>
