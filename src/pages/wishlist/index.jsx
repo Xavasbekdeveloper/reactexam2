@@ -10,6 +10,7 @@ import { IoCartOutline, IoCart } from "react-icons/io5";
 
 import "./wishlist.scss";
 import Empty from "../../components/empty";
+import BackTop from "../../components/back-top";
 
 const Wishlist = () => {
   const wishlistData = useSelector((state) => state.wishlist.data);
@@ -83,6 +84,7 @@ const Wishlist = () => {
 
   return (
     <section className="wishlist">
+      <BackTop />
       <div className="container">
         {wishlistData.length ? (
           <div>

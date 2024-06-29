@@ -1,6 +1,7 @@
 import React, { memo, useEffect, useState } from "react";
 
 import "./contact.scss";
+import BackTop from "../../components/back-top";
 
 const BOT__TOKEN = "7296011111:AAH9fsPtqvBOqekhvlcG9MVl4JBifgNtEJk";
 const CHAT__ID = "-1002221404265";
@@ -33,6 +34,7 @@ const Contact = () => {
 
   return (
     <section className="contact">
+      <BackTop />
       <div className="container contact__container">
         <div className="contact__top">
           <div className="contact__top__left">
