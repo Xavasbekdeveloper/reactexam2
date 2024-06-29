@@ -1,0 +1,24 @@
+.lazyLoading {
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        width: 65px;
+        height: 65px;
+        animation: lazy 1.7s linear 0s infinite;
+    }
+}
+
+@keyframes lazy {
+    from {
+        transform: rotate(10deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

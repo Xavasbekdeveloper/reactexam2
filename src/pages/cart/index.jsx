@@ -1,9 +1,12 @@
 import React, { memo, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
-import "./cart.scss";
 import Product from "../../components/product";
 import CartModal from "../../components/cart-modal";
+import Empty from "../../components/empty";
+import empty from "../../assets/images/empty-cart.webp";
+
+import "./cart.scss";
+import BackTop from "../../components/back-top";
 
 const Cart = () => {
   const cartData = useSelector((state) => state.cart.value);
@@ -15,7 +18,9 @@ const Cart = () => {
     window.scroll(0, 0);
   }, []);
 
-  let products = cartData?.map((product) => <Product product={product} />);
+  let products = cartData?.map((product) => (
+    <Product key={product.id} product={product} />
+  ));
 
   const calculateAllPrice = () => {
     let total = cartData?.reduce(
@@ -38,54 +43,59 @@ const Cart = () => {
 
   return (
     <>
-      <section className="cart">
-        <div className="container">
-          <div className="cart__box">
-            <div className="cart__box__top">
-              <p>PRODUCT</p>
-              <p>PRICE</p>
-              <p>QTY</p>
-              <p>UNIT PRICE</p>
-            </div>
-            <div className="cart__box__bottom">{products}</div>
-          </div>
-          {/*  */}
-          <div className="cart__bottom">
-            {/*  */}
-            <form onSubmit={handleCoupon} className="cart__bottom__coupon">
-              <input
-                type="text"
-                placeholder="Voucher code"
-                value={coupon}
-                onChange={(e) => setCoupon(e.target.value)}
-              />
-              <button>Redeem</button>
-            </form>
-            {/*  */}
-            <div className="cart__bottom__right">
-              {/*  */}
-              <div className="cart__bottom__right__list">
-                <ul>
-                  <li>Subtotal:</li>
-                  <li>Shipping fee:</li>
-                  <li>Coupon:</li>
-                </ul>
-                <ul>
-                  <li>${+calculateAllPrice()}</li>
-                  <li>$20</li>
-                  <li>{voucher?.brm()}</li>
-                </ul>
+      <BackTop />
+      {cartData.length ? (
+        <section className="cart">
+          <div className="container">
+            <div className="cart__box">
+              <div className="cart__box__top">
+                <p>PRODUCT</p>
+                <p>PRICE</p>
+                <p>QTY</p>
+                <p>UNIT PRICE</p>
               </div>
+              <div className="cart__box__bottom">{products}</div>
+            </div>
+            {/*  */}
+            <div className="cart__bottom">
               {/*  */}
-              <div className="cart__bottom__right__middle">
-                <p>Total</p>
-                <p>${(+calculateAllPrice() + 20 - +voucher).brm()}</p>
+              <form onSubmit={handleCoupon} className="cart__bottom__coupon">
+                <input
+                  type="text"
+                  placeholder="Voucher code"
+                  value={coupon}
+                  onChange={(e) => setCoupon(e.target.value)}
+                />
+                <button>Redeem</button>
+              </form>
+              {/*  */}
+              <div className="cart__bottom__right">
+                {/*  */}
+                <div className="cart__bottom__right__list">
+                  <ul>
+                    <li>Subtotal:</li>
+                    <li>Shipping fee:</li>
+                    <li>Coupon:</li>
+                  </ul>
+                  <ul>
+                    <li>${+calculateAllPrice()}</li>
+                    <li>$20</li>
+                    <li>{voucher?.brm()}</li>
+                  </ul>
+                </div>
+                {/*  */}
+                <div className="cart__bottom__right__middle">
+                  <p>Total</p>
+                  <p>${(+calculateAllPrice() + 20 - +voucher).brm()}</p>
+                </div>
+                <button onClick={() => setClose(true)}>Check out</button>
               </div>
-              <button onClick={() => setClose(true)}>Check out</button>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : (
+        <Empty img={empty} />
+      )}
       {close ? <CartModal close={close} setClose={setClose} /> : <></>}
     </>
   );

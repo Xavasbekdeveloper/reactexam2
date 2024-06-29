@@ -6,6 +6,7 @@ import "./login.scss";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setToken } from "../../context/slice/authSlice";
+import { toast } from "react-toastify";
 
 let initialState = {
   username: "johnd",
@@ -23,7 +24,6 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     signIn(formData);
-    console.log(formData);
   };
 
   useEffect(() => {
@@ -31,13 +31,14 @@ const Login = () => {
   }, []);
 
   useEffect(() => {
+    if (isError) {
+      toast.error("password or username is incorrect");
+    }
     if (isSuccess) {
       dispatch(setToken(data.token));
       navigate("/admin");
     }
-  }, [isSuccess]);
-
-  console.log(data);
+  }, [isSuccess, isError]);
 
   return (
     <section className="login">

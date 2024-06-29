@@ -4,6 +4,7 @@ import "./admin.scss";
 import { useDispatch } from "react-redux";
 import { logout } from "../../context/slice/authSlice";
 import { useNavigate } from "react-router-dom";
+import BackTop from "../../components/back-top";
 
 const Admin = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const Admin = () => {
   };
   return (
     <section className="admin">
+      <BackTop />
       <div className="container">
         <h1>Admin panel</h1>
         <div className="admin__box">

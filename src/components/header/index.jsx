@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import profile from "../../assets/icons/profile.svg";
 import heart from "../../assets/icons/heart.svg";
 import logo from "../../assets/icons/logo.svg";
@@ -18,6 +18,7 @@ const Header = () => {
   const wishlistData = useSelector((state) => state.wishlist.data);
   const cartData = useSelector((state) => state.cart.value);
   const isLogin = useSelector((state) => state.auth.token);
+
   return (
     <>
       <div className="top">

@@ -3,6 +3,9 @@ import { IoClose, IoCardOutline } from "react-icons/io5";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaPaypal } from "react-icons/fa";
 import { BsBank } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { removeAll } from "../../context/slice/cartSlice";
 
 import "./cartModal.scss";
 
@@ -14,8 +17,9 @@ const CartModal = ({ close, setClose }) => {
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [apy, setPay] = useState("");
+  const [pay, setPay] = useState("");
   const [phone, setPhone] = useState("");
+  const dispatch = useDispatch();
 
   const handleSendMessage = (e) => {
     e.preventDefault();
@@ -24,13 +28,24 @@ const CartModal = ({ close, setClose }) => {
     text += `LName: ${lname} %0A`;
     text += `Email: ${email} %0A`;
     text += `phone: ${phone} %0A`;
-    text += `Message: ${message}`;
+    text += `Message: ${message}  %0A`;
+    text += `Pay: ${pay}`;
     let url = ` https://api.telegram.org/bot${BOT__TOKEN}/sendMessage?chat_id=${CHAT__ID}&text=${text}`;
     let api = new XMLHttpRequest();
     api.open("GET", url, true);
     api.send();
 
-    e.target.reset();
+    dispatch(removeAll());
+
+    setFname("");
+    setLname("");
+    setEmail("");
+    setMessage("");
+    setPhone("");
+    setPay("");
+
+    setClose(false);
+    toast.success("Your information has been sent successfully");
   };
 
   return (
@@ -52,24 +67,28 @@ const CartModal = ({ close, setClose }) => {
           {/*  */}
           <div className="modal__form__bottom__box">
             <input
+              required
               value={fname}
               onChange={(e) => setFname(e.target.value)}
               type="text"
               placeholder="First Name"
             />
             <input
+              required
               value={lname}
               onChange={(e) => setLname(e.target.value)}
               type="text"
               placeholder="Last Name"
             />
             <input
+              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               type="text"
               placeholder="Email Address"
             />
             <textarea
+              required
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               name=""
@@ -84,24 +103,46 @@ const CartModal = ({ close, setClose }) => {
                   <IoCardOutline />
                   Credit Card Or Debit
                 </label>
-                <input id="card" type="radio" name="pay" />
+                <input
+                  checked={pay === "card"}
+                  onChange={() => setPay("card")}
+                  required
+                  id="card"
+                  type="radio"
+                  name="pay"
+                />
               </div>
               <div>
                 <label htmlFor="paypal">
                   <FaPaypal />
                   Paypal
                 </label>
-                <input id="paypal" type="radio" name="pay" />
+                <input
+                  checked={pay === "paypal"}
+                  onChange={() => setPay("paypal")}
+                  required
+                  id="paypal"
+                  type="radio"
+                  name="pay"
+                />
               </div>
               <div>
                 <label htmlFor="bank">
                   <BsBank />
                   Bank Transfer
                 </label>
-                <input id="bank" type="radio" name="pay" />
+                <input
+                  checked={pay === "bank"}
+                  onChange={() => setPay("bank")}
+                  required
+                  id="bank"
+                  type="radio"
+                  name="pay"
+                />
               </div>
             </div>
             <input
+              required
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               type="text"

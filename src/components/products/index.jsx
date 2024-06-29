@@ -8,19 +8,23 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addWishlist } from "../../context/slice/wishlistSlice";
 import { addToCart } from "../../context/slice/cartSlice";
+import ProductsLoading from "../products-loading";
 
 import "./products.scss";
 
 const Products = () => {
   const [categoryValue, setCategoryValue] = useState("all");
   const [limitValue, setLimitValue] = useState(1);
-  let limit = 8;
+  let limit = 10;
   const dispatch = useDispatch();
   const wishlistData = useSelector((state) => state.wishlist.data);
   const cartData = useSelector((state) => state.cart.value);
 
-  const { data: productsData, isLoading: productsLoading } =
-    useGetProductsQuery({ limit: limit * limitValue });
+  const {
+    data: productsData,
+    isLoading: productsLoading,
+    isFetching: productsFetching,
+  } = useGetProductsQuery({ limit: limit * limitValue });
   let category = categoryValue === "all" ? "" : "/category";
   const { data: categoriesData, isLoading: categoryLoading } =
     useGetCategoryQuery({ category });
@@ -118,9 +122,13 @@ const Products = () => {
           {/* {categories} */}
         </ul>
         {/* products */}
-        <div className="products__cards">{products}</div>
+        <div className="products__cards">
+          {productsLoading ? <ProductsLoading limit={limit} /> : products}
+        </div>
         <div className="products__btn">
-          <button onClick={() => setLimitValue((p) => p + 1)}>Load more</button>
+          <button onClick={() => setLimitValue((p) => p + 1)}>
+            {productsFetching ? "Loading..." : "Load more"}
+          </button>
         </div>
       </div>
     </section>

@@ -1,20 +1,26 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from "react-icons/io";
-import { IoCartOutline } from "react-icons/io5";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useGetProductsQuery } from "../../context/api/productAPi";
 import { addWishlist } from "../../context/slice/wishlistSlice";
 import empty from "../../assets/images/emptypng.png";
+import { IoCartOutline, IoCart } from "react-icons/io5";
 
 import "./wishlist.scss";
+import Empty from "../../components/empty";
 
 const Wishlist = () => {
   const wishlistData = useSelector((state) => state.wishlist.data);
+  const cartData = useSelector((state) => state.cart.value);
   const { data } = useGetProductsQuery();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
 
   let products = wishlistData?.map((product) => {
     let res = [];
@@ -34,15 +40,22 @@ const Wishlist = () => {
         <div className="products__card__img">
           <img src={product?.image} alt={product?.title} />
           <div className="products__card__img__btns">
-            <button>
-              <IoCartOutline />
+            <button
+              disabled={cartData?.some((el) => el.id === product.id)}
+              onClick={() => dispatch(addToCart(product))}
+            >
+              {cartData?.some((el) => el.id === product.id) ? (
+                <IoCart color="#33A0FF" />
+              ) : (
+                <IoCartOutline color="#33A0FF" />
+              )}
             </button>
             <button
               onClick={() => dispatch(addWishlist(product))}
               className="products__card__heart-btn"
             >
               {wishlistData.some((el) => el.id === product.id) ? (
-                <FaHeart color="crimson" />
+                <FaHeart color="#33A0FF" />
               ) : (
                 <FaRegHeart color="#33A0FF" />
               )}
@@ -77,10 +90,7 @@ const Wishlist = () => {
             <div className="wishlist__cards">{products}</div>
           </div>
         ) : (
-          <div className="wishlist__empty">
-            <img src={empty} alt="empty img" />{" "}
-            <button onClick={() => navigate("/")}>Go Home</button>
-          </div>
+          <Empty img={empty} />
         )}
       </div>
     </section>

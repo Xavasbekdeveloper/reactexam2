@@ -1,7 +1,4 @@
 import React, { memo } from "react";
-import product1 from "../../assets/images/product-img1.svg";
-import product2 from "../../assets/images/product-img2.svg";
-import product3 from "../../assets/images/product-img3.svg";
 
 import "./hero.scss";
 

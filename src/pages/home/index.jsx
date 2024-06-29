@@ -5,6 +5,7 @@ import Sneakers from "../../components/sneakers";
 import Services from "../../components/services";
 import News from "../../components/news";
 import Featured from "../../components/featured";
+import BackTop from "../../components/back-top";
 
 const Home = () => {
   useEffect(() => {
@@ -19,6 +20,7 @@ const Home = () => {
       <Services />
       <News />
       <Featured />
+      <BackTop />
     </>
   );
 };

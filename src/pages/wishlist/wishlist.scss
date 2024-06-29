@@ -15,21 +15,6 @@
         grid-gap: 20px;
     }
 
-    &__empty {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        gap: 12px;
-
-        button {
-            border: none;
-            background-color: transparent;
-            color: #40BFFF;
-            font-size: 20px;
-            font-weight: 400;
-        }
-    }
 }
 
 @media (max-width: 978px) {
@@ -61,16 +46,6 @@
     .wishlist {
         &__cards {
             grid-template-columns: repeat(2, 1fr);
-        }
-    }
-}
-
-@media (max-width: 570px) {
-    .wishlist {
-        &__empty {
-            img {
-                width: 100%;
-            }
         }
     }
 }
