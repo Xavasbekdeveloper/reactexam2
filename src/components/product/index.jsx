@@ -52,7 +52,7 @@ const Product = ({ product }) => {
       </div>
       {/*  */}
       <span className="cart__box__bottom__item-price">
-        ${(product?.price * product?.amount).brm()}
+        ${(product?.price * product?.amount).toFixed(2)}
       </span>
     </div>
   );

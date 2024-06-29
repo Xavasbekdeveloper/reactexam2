@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import { IoMdStar } from "react-icons/io";
 import { useGetProductsQuery } from "../../context/api/productAPi";
 import "./featured.scss";
+import { Link } from "react-router-dom";
 
 const Featured = () => {
   const { data } = useGetProductsQuery({ limit: 3 });
@@ -9,7 +10,9 @@ const Featured = () => {
   const product = data?.map((product) => (
     <div className="featured__card" key={product.id}>
       <div className="featured__images-boxes">
-        <img src={product.image} alt={product.title} />
+        <Link to={`/products/${product.id}`}>
+          <img src={product.image} alt={product.title} />
+        </Link>
       </div>
       <div className="featured__info-box">
         <h3 className="featured__card-title">{product.title}</h3>

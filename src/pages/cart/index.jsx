@@ -27,7 +27,7 @@ const Cart = () => {
       (sum, item) => sum + item?.amount * item?.price,
       0
     );
-    return total?.brm();
+    return total.toFixed(2);
   };
 
   const handleCoupon = (e) => {
@@ -80,13 +80,13 @@ const Cart = () => {
                   <ul>
                     <li>${+calculateAllPrice()}</li>
                     <li>$20</li>
-                    <li>{voucher?.brm()}</li>
+                    <li>{voucher?.toFixed(2)}</li>
                   </ul>
                 </div>
                 {/*  */}
                 <div className="cart__bottom__right__middle">
                   <p>Total</p>
-                  <p>${(+calculateAllPrice() + 20 - +voucher).brm()}</p>
+                  <p>${(+calculateAllPrice() + 20 - +voucher).toFixed(2)}</p>
                 </div>
                 <button onClick={() => setClose(true)}>Check out</button>
               </div>

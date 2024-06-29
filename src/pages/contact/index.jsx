@@ -48,6 +48,7 @@ const Contact = () => {
               <label htmlFor="fullname">Fullname</label>
               <input
                 value={fname}
+                required
                 onChange={(e) => setFname(e.target.value)}
                 id="fullname"
                 type="text"
@@ -58,9 +59,10 @@ const Contact = () => {
               <label htmlFor="Email">Email</label>
               <input
                 value={email}
+                required
                 onChange={(e) => setEmail(e.target.value)}
                 id="Email"
-                type="text"
+                type="email"
                 placeholder="jamesdoe@gmail.com"
               />
             </div>
