@@ -12,7 +12,7 @@ const Footer = () => {
       <div className="container">
         <div className="footer__top">
           <div className="footer__top__row">
-            <img src={logo} alt="footer img" />
+            <img src={logo} alt="footer" />
             <p>
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
@@ -26,8 +26,8 @@ const Footer = () => {
               scrambled.
             </p>
             <div>
-              <img src={facebook} alt="footer img" />
-              <img src={twitter} alt="footer img" />
+              <img src={facebook} alt="footer" />
+              <img src={twitter} alt="footer" />
             </div>
           </div>
           <div className="footer__top__row">
@@ -66,7 +66,7 @@ const Footer = () => {
           </ul>
         </div>
         <div className="footer__bot">
-          <img src={brands} alt="footer img" />
+          <img src={brands} alt="footer" />
         </div>
       </div>
     </footer>

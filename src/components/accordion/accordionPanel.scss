@@ -1,0 +1,31 @@
+.accordion-panel {
+    overflow: hidden;
+}
+
+.accordion-header {
+    display: flex;
+    align-items: center;
+    padding-right: 15px;
+    cursor: pointer;
+}
+
+.footer__mid__list {
+    flex: 1;
+}
+
+.accordion-icon {
+    width: 10px;
+    height: 10px;
+    border-left: 2px solid #333;
+    border-bottom: 2px solid #333;
+    transform: rotate(-45deg);
+    transition: transform 0.3s ease;
+}
+
+.accordion-icon.open {
+    transform: rotate(135deg);
+}
+
+.accordion-content {
+    padding: 12px;
+}
